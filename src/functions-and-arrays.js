@@ -228,6 +228,30 @@ function greatestProduct(matrix) {
   return Math.max(...products);
 }
 
+function greatestProductOfDiagonals(matrix){
+  let products = [];
+  
+  for (let i = 0; i < matrix.length; i += 1) {
+    for (let k = 0; k < matrix.length-3; k += 1) {
+      products.push(matrix[i][k] * matrix[i][k+1] * matrix[i][k+2] * matrix[i][k+3])
+    }
+  }
+  
+  for (let i = 0; i < matrix.length-3; i +=1) {
+    for (let k = 0; k < matrix.length; k +=1) {
+      products.push(matrix[i][k] * matrix[i+1][k] * matrix[i+2][k] * matrix[i+3][k])
+    }
+  }
+
+  for (let i = 0; i < matrix.length-3; i +=1) {
+    for (let k = 0; k < matrix.length-3; k +=1) {
+      products.push(matrix[i][k] * matrix[i+1][k+1] * matrix[i+2][k+2] * matrix[i+3][k+3])
+    }
+  }
+
+  return Math.max(...products);
+}
+
 
 
 
