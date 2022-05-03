@@ -1,24 +1,75 @@
 // Iteration #1: Find the maximum
-function maxOfTwoNumbers() {}
-
-
+function maxOfTwoNumbers(a, b) {
+  if (a > b) {
+    return a;
+  } else {
+    return b;
+  }
+}
 
 // Iteration #2: Find longest word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
 
-function findLongestWord() {}
+function findLongestWord(array) {
+  
+  if (array.length === 0) {
+    return null;
+  }
 
+  if (array.length === 1) {
+    return array[0];
+  }
 
+  longestWord = array[0]; 
+
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i].length > longestWord.length) {
+      longestWord = array[i];
+    }
+  }
+
+  return longestWord
+}
 
 // Iteration #3: Calculate the sum
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
-function sumNumbers() {}
+function sumNumbers(toBeSummed) {
+  let sum = 0;
+
+  toBeSummed.forEach(function (element) {
+    sum += element;
+  }) 
+
+  return sum
+}
 
 
 
 // Iteration #3.1 Bonus:
-function sum() {}
+function sum(toBeSummed) {
+  let sum = 0;
+
+  if (toBeSummed.length === 0) {
+    return 0;
+  }
+
+  toBeSummed.forEach(function (element) {
+    if (typeof element === "string") {
+      sum += element.length;
+    } else if (typeof element === "boolean") {
+      if(element === true){
+        sum += 1;
+      }
+    } else if (typeof element === "number") { 
+      sum += element;
+    } else {
+      throw new Error("Unsupported data type sir or ma'am")
+    }
+  }) 
+
+  return sum
+}
 
 
 
@@ -26,16 +77,36 @@ function sum() {}
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
-function averageNumbers() {}
+function averageNumbers(numbers) {
+  if (numbers.length === 0) {
+    return null;
+  }
+  
+  return sum(numbers)/numbers.length;
+}
 
 
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
 
-function averageWordLength() { }
+function averageWordLength(strings) { 
+  if (strings.length === 0) {
+    return null;
+  }
+  
+  return sum(strings)/strings.length;
+}
 
 // Bonus - Iteration #4.1
-function avg() {}
+function avg(mixedArray) {
+  if (mixedArray.length === 0) {
+    return null;
+  }
+  
+  let resultNotRounded = sum(mixedArray)/mixedArray.length;
+
+  return Number(resultNotRounded.toFixed(2));
+}
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
@@ -52,14 +123,38 @@ const wordsUnique = [
   'bring'
 ];
 
-function uniquifyArray() {}
+function uniquifyArray(array) {
+  if (array.length === 0) {
+    return null;
+  }
+  
+  newArray = [array[0]];
+
+  for (let i = 1; i < array.length; i += 1) {
+    if (!newArray.includes(array[i])) {
+      newArray.push(array[i]);
+    }
+  }
+
+  return newArray
+}
 
 
 
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
-function doesWordExist() {}
+function doesWordExist(array, wordToBeFound) {
+  if (array.length === 0) {
+    return null;
+  }
+
+  if (array.includes(wordToBeFound)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 
 
@@ -78,13 +173,23 @@ const wordsCount = [
   'matter'
 ];
 
-function howManyTimes() {}
+function howManyTimes(array, word) {
+  let count = 0;
+
+  for (let i = 0; i<array.length; i += 1) {
+    if (array[i] === word) {
+      count += 1;
+    }
+  }
+
+  return count;
+}
 
 
 
 // Iteration #8: Bonus
 const matrix = [
-  [8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
+  [1, 1, 1, 1, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 1, 1, 1, 1],
   [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0],
   [81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65],
   [52, 70, 95, 23, 4, 60, 11, 42, 69, 24, 68, 56, 1, 32, 56, 71, 37, 2, 36, 91],
@@ -106,7 +211,22 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {}
+function greatestProduct(matrix) {
+  let products = [];
+  
+  for (let i = 0; i < matrix.length; i += 1) {
+    for (let k = 0; k < matrix.length-3; k += 1) {
+      products.push(matrix[i][k] * matrix[i][k+1] * matrix[i][k+2] * matrix[i][k+3])
+    }
+  }
+  
+  for (let i = 0; i < matrix.length-3; i +=1) {
+    for (let k = 0; k < matrix.length; k +=1) {
+      products.push(matrix[i][k] * matrix[i+1][k] * matrix[i+2][k] * matrix[i+3][k])
+    }
+  }
+  return Math.max(...products);
+}
 
 
 
